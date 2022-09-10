@@ -65,7 +65,7 @@ image here
  
  * SOC voltage, is the voltage of the IMC. 
     * It's not recommended to leave it on auto, the range should be arround 1.00V and 1.125V. Higher values can also be acceptable and may be necessary for stabilizing memories with higher capacities and stabilizing FCLK. 
-    * If your SOC voltage is too high (1.15V-1.25V), it cal also cause memory instability.  
+    * If your SOC voltage is too high (1.15V-1.25V), it can also cause memory instability.  
  * **(Zen2 only)** VDDG: Infinity Fabric voltage.
    * Needs to be at least 40mV under SOC voltage since it's derived from SOC voltage.  
   
