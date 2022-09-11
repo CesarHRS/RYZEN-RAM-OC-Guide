@@ -132,7 +132,7 @@ Terminology:
 | :-----: | :------------: | :-----------------: |
 |  | 1.00V ~ 1.20V | 1.20V ~ 1.25V |
   
-It's not recommended to leave SOC voltage on auto, the range should be around 1.00V and 1.2V. Higher values can also be acceptable and may be necessary to stabilize memories with higher capacities and stabilise FCLK. 
+It's not recommended to leave SOC voltage on auto, the range should be around 1.00V and 1.20V. Higher values aren't encouraged but can be acceptable and even necessary to stabilize memories with higher capacities and stabilise FCLK. 
   
 If your SOC voltage is too high (1.2V-1.25V), it can also cause memory instability.  
 
@@ -209,7 +209,7 @@ Rank interleaving allows the memory controller to parallelize memory requests, f
 
 * [JEDEC JESD79-4B (p.174)](http://www.softnology.biz/pdf/JESD79-4B.pdf) specifies that the absolute maximum is 1.50 V.
   > Stresses greater than those listed under “Absolute Maximum Ratings” may cause permanent damage to the device. This is a stress rating only, and functional operation of the device at these or any other conditions above those indicated in the operational sections of this specification is not implied. Exposure to absolute maximum rating conditions for extended periods may affect reliability.
-* Even with the official value being 1.50V, the majority of the ICs cannot remain safe at this voltage, for example, Samsung C-die can start degrading with 1.35V. Furthermore, ICs like Samsung B-die have been observed with daily voltages of 1.5V for years. If you want to play it safe, research what voltages are safe for your IC, or just stick to 1.35V.
+* Even with the official value being 1.50V, the majority of the ICs cannot remain safe at this voltage, for example, Samsung C-die can start degrading with 1.35V. However, ICs like Samsung B-die have been observed with daily voltages of 1.5V for years. If you want to play it safe, research what voltages are safe for your IC, or just stick to 1.35V.
 * On the majority of the ICs, tCL scales with voltage, which means that giving more voltage to the IC, will allow you to drop tCL, but tRCD, tRP and tRFC typically will not scale with voltage.
 * Some bad ICs can also scale negatively with voltage, becoming unstable at higher voltages.
 * Very high voltages can also overheat the ICs and make them perform worse and degrade faster.
