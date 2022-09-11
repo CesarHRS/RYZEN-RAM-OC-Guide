@@ -1,5 +1,22 @@
 # AMD-RAM-OC-Guide
 
+# Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Basics](#basics)
+  - [Primary, Secondary and Tertiary Timings](#primary-secondary-and-tertiary-timings)
+    - [Primary](#primary)
+    - [Secondary](#secondary)
+    - [Tertiary](#tertiary)
+- [Limiting Factors](#limiting-factors)
+  - [Motherboard](#motherboard)
+  - [Integrated Memory Controller (IMC)](#integrated-memory-controller-imc)
+  - [Printed Circuit Board (PCB)](#printed-circuit-board-pcb)
+  - [Integrated Circuits (ICs)](#integrated-circuits-ics)
+    - [Density](#density)
+    - [Logical Ranks](#logical-ranks)
+    - [Voltage](#voltage) 
+    - [Temperature](#temperature)
+
 * Units:
   * Hertz: It's a unit of frequency used in the SI, it is equivalent to one cycle per second.
   * Transfer: It refers to a quantity of data that can be transferred in a second regardless of frequency. 
@@ -46,6 +63,7 @@ Green (S) = Secondary Timings.
 
 Blue (T) = Tertiary Timings.
 
+
 ### Primary
 
 * **tCL** (Column Address Strobe): **CAS** , is the first timing listed on every memory kit.
@@ -79,7 +97,7 @@ Blue (T) = Tertiary Timings.
 ## Integrated Memory Controller (IMC)
 IMCs are responsible to read and write and refresh DRAM.
 
-*Zen and Zen+ IMC won't let you hit high frequencies since they have a "bad" IMC, on the other hand, Zen2 and Zen3 IMCs are much better as you can see in the next table.
+* **Zen** and **Zen+** IMC won't let you hit high frequencies since they have a "bad" IMC, on the other hand, **Zen2** and **Zen3** IMCs are much better as you can see in the next table.
 
 Expected memory frequency range for 2 single-rank DIMMs, with just the IMC bottleneck:
  
@@ -109,6 +127,14 @@ Terminology:
 * SOC voltage, is the voltage of the IMC. 
   * IMCs can degrade with high SOC voltages and higher temperatures. 
   * Higher voltages may cause instability.
+
+| SOC | Daily Voltage (V) | Extreme Voltage (V) | 
+| :-----: | :------------: | :-----------------: |
+|  | 1.00V ~ 1.20V | 1.20V ~ 1.25V |
+  
+It's not recommended to leave SOC voltage on auto, the range should be around 1.00V and 1.2V. Higher values can also be acceptable and may be necessary to stabilize memories with higher capacities and stabilise FCLK. 
+  
+If your SOC voltage is too high (1.2V-1.25V), it can also cause memory instability.  
 
 * **(Zen2 only)** VDDG: Infinity Fabric voltage.
   * Needs to be at least 40mV under SOC voltage since it's derived from SOC voltage.  
@@ -195,14 +221,6 @@ Rank interleaving allows the memory controller to parallelize memory requests, f
 |  | 1.20V ~ 1.45V | 1.45V ~ 1.6V | 
 
 Voltages exceeding 1.45V for daily use are only recommended for Samsung B-die and Hynix D-die which are up to 1.50V. To use extreme voltages daily you will need good PCBs and it's also recommended to hydro-cool your sticks.
-
-| SOC | Daily Voltage (V) | Extreme Voltage (V) | 
-| :-----: | :------------: | :-----------------: |
-|  | 1.00V ~ 1.20V | 1.20V ~ 1.25V |
-  
-It's not recommended to leave SOC voltage on auto, the range should be around 1.00V and 1.2V. Higher values can also be acceptable and may be necessary to stabilize memories with higher capacities and stabilise FCLK. 
-  
-If your SOC voltage is too high (1.2V-1.25V), it can also cause memory instability.  
   
 ## Temperature
   
