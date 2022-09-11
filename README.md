@@ -1,5 +1,4 @@
 # AMD-RAM-OC-Guide
-# General RAM Info:
 
 * Units:
   * Hertz: It is a unity of frequency used in the SI, it is equivalent to one cycle per second.
@@ -11,7 +10,10 @@
   * Giga: 10<sup>9</sup>
   
 
-## Basics:
+# Basics:
+  This section will go through the minimum knoladge needed to overclock a RAM. 
+
+
 * RAM frequency is measured in megahertz (MHz), having your RAM operating at a higher frequency means more cycles per second, which will give you some extra performance. Having very high frequencies can make your RAM unstable and it may crash your PC.
   * **Advanced tip:** The only case witch lowering the clock will result in better performance is in tREFI, since tREFI measures the timing between RAM refreshes. While your RAM refreshes, you can't write or read anything on it, so you want to make that time gap as little as possible.
 
@@ -33,12 +35,12 @@
   
 ## Primary, Secondary and Tertiary Timings:
     
-image here
-    
+![](Images/zentimmings.png)
+
 * RAM timings are split into 3 categories, primary, secondary and tertiary
 * Primary and secondary timings will affect latency and bandwidth, while tertiary timings affect only bandwidth
   
-## Limiting Factors:  
+# Limiting Factors:  
   This section will go through components that will limit your overclocking capacities. 
  # Motherboard
   * Always prefer motherboards with 2 DIMM slots, they will let you achieve higher frequencies.
