@@ -1,8 +1,9 @@
 # AMD-RAM-OC-Guide
 
 * Units:
-  * Hertz: It is a unit of frequency used in the SI, it is equivalent to one cycle per second.
+  * Hertz: It's a unit of frequency used in the SI, it is equivalent to one cycle per second.
   * Transfer: It refers to a quantity of data that can be transferred in a second regardless of frequency. 
+  * Celcius: It's the unity of temperature from the SI alongside Kelvin.
 
 * Prefixes:
   * Nano (n): 10<sup>-9</sup>
@@ -14,7 +15,7 @@
   This section will go through the minimum knowledge required to overclock RAM. 
 
 * RAM frequency is measured in megahertz (MHz), having your RAM operating at a higher frequency means more cycles per second, which will give you some extra performance. Having very high frequencies can make your RAM unstable and it may crash your PC.
-  * **Advanced tip:** The only case witch lowering the clock will result in better performance is in tREFI, since tREFI measures the timing between RAM refreshes. While your RAM refreshes, you can't write or read anything on it, so you want to make that time gap as little as possible.
+  * **Advanced tip:** The only case witch lowering the clock will result in better performance is in tREFI since tREFI measures the timing between RAM refreshes. While your RAM refreshes, you can't write or read anything on it, so you want to make that time gap as little as possible.
 
 * RAM Timings are the latency between various operations inside a RAM chip, having low latencies will result in better performance, so keep them as low as possible. Having very low timings will also make your RAM unstable and may result in crashes. 
   * The main timing of your ram is called CL, tCL or CAS Latency, it measures the delay between the **READ** command and the moment the data is available, this interval is specified in nanoseconds.
@@ -45,95 +46,168 @@ Green (S) = Secondary Timings.
 
 Blue (T) = Tertiary Timings.
 
+### Primary
+
+* **tCL** (Column Address Strobe): **CAS** , is the first timing listed on every memory kit.
+  * measures the delay between the **RD** (read) command and the moment the data is available, this interval is specified in nanoseconds. 
+* **tRCD** (Row Address to Column Address Delay): this is the second timing listed on every memory kit.
+  * measures the delay between opening a row of memory and accessing columns within it.
+  * Usually is divided into tRCDWR and tRCDRD
+* **tRP** (Row Precharge Time): this is the third timing listed on every memory kit.
+  * measures the delay between issuing the **PRE** (precharge) command and opening the next row.
+* **tRAS** (Row Active Time): is the fourth timing listed on every memory kit.
+  * measures the delay between a row **ACT** (activation) command and issuing the **PRE** (precharge) command.
+  
+### Secondary
+
+* **tRFC** (Refresh Cycle Time): this is the only secondary timing with a three-digit number.  
+  * measures the delay between two refresh cycles in nanoseconds(ns).
+
+### Tertiary
+
+* **tREFI** (Refresh Interval): is the tertiary timing with a five-digit number.
+  * measures the time that is needed to refresh.
+
 # Limiting Factors:  
   This section will go through components that will limit your overclocking capacities. 
- ## Motherboard
-  * Always prefer motherboards with 2 DIMM slots, they will let you achieve higher frequencies. However, entry-level motherboard, which usually feature 2 DIMM Slots may not overclock as well thanks to their low-quality PCBs.
-    * While using motherboards that use daisy chain (4 slots, usually), 2 sticks are preferred, if you use 4 sticks the performance will be impacted // ver o video do buildzoid
-    * Motherboards with T-topology will overclock better with 4 sticks equipped, using 2 sticks will not cap your overclocking capability that much as in a daisy chain with 4 slots. 
  
- ## Integrated Memory Controller (IMC)
-   Terminology:
+## Motherboard
+* Always prefer motherboards with 2 DIMM slots, they will let you achieve higher frequencies. However, entry-level motherboards, which usually feature 2 DIMM Slots may not overclock as well thanks to their low-quality PCBs.
+* While using motherboards that use daisy chain (4 slots, usually), 2 sticks are preferred, if you use 4 sticks the performance will be impacted // ver o video do buildzoid
+* Motherboards with T-topology will overclock better with 4 sticks equipped, using 2 sticks will not cap your overclocking capability that much as in a daisy chain with 4 slots. 
+ 
+## Integrated Memory Controller (IMC)
+IMCs are responsible to read and write and refresh DRAM.
+
+*Zen and Zen+ IMC won't let you hit high frequencies since they have a "bad" IMC, on the other hand, Zen2 and Zen3 IMCs are much better as you can see in the next table.
+
+Expected memory frequency range for 2 single-rank DIMMs, with just the IMC bottleneck:
+ 
+| Ryzen | Expected Speed (MT/s) |
+| :---: | :----------------------: |
+| Zen | 3000 - 3600 |
+| Zen+ | 3400 - 3800 |
+| Zen2 | 3600 - 3800 (1:1 MCLK:FCLK) <br/> 3800+ (2:1 MCLK:FCLK) |
+ 
+With more DIMMs and/or dual-rank DIMMs, the expected frequency may be lower.
+
+Terminology:
    
-  * GDM: Geardown mode, it will round your tCL if it's odd.
-    * If you run DDR-3000 CL15 with GDM enabled, the tCL will be rounded to 16.
+* GDM: Geardown mode, it will round your tCL if it's odd.
+  * If you run DDR-3000 CL15 with GDM enabled, the tCL will be rounded to 16.
     * In terms of performance: GDM disabled > GDM enabled.
    
-  * MCLK: Memory clock, for example, DDR4-3000, the MCLK is 1500MHz.
+* MCLK: Memory clock, for example, DDR4-3000, the MCLK is 1500MHz.
 
-  * FCLK: Infinity Fabric clock.
+* FCLK: Infinity Fabric clock.
 
-  * UCLK: Unified memory controller clock. 
-
-    * If FCLK and MCLK are synchronized (1:1), `UCLK = MCLK`
-
-    * If FCLK and MCLK are desynchronized (2:1), `UCLK = 1/2 * MCLK`.   
+* UCLK: Unified memory controller clock. 
+  * If FCLK and MCLK are synchronized (1:1), `UCLK = MCLK`
+  * If FCLK and MCLK are desynchronized (2:1), `UCLK = 1/2 * MCLK`. 
+    * desynchronizing FCLK and MCLK usually is a bad idea.
  
- * SOC voltage, is the voltage of the IMC. 
-    * It's not recommended to leave it on auto, the range should be around 1.00V and 1.125V. Higher values can also be acceptable and may be necessary for stabilizing memories with higher capacities and stabilizing FCLK. 
-    * If your SOC voltage is too high (1.15V-1.25V), it can also cause memory instability.  
- * **(Zen2 only)** VDDG: Infinity Fabric voltage.
-   * Needs to be at least 40mV under SOC voltage since it's derived from SOC voltage.  
-  
- Expected memory frequency range for 2 single-rank DIMMs, with no motherboard or IC's bottleneck
- 
- 
-  | Ryzen | Expected Speed (MT/s) |
-  | :---: | :----------------------: |
-  | Zen | 3000 - 3600 |
-  | Zen+ | 3400 - 3800 |
-  | Zen2 | 3600 - 3800 (1:1 MCLK:FCLK) <br/> 3800+ (2:1 MCLK:FCLK) |
-  
-  With more DIMMs and/or dual-rank DIMMs, the expected frequency may be lower.
-  
-  * tRCD is split into tRCDRD (read) and tRCDWR (write). Most of the time the tRCDWR can go lower than tRCDRD, but I have not seen any performance gains from it.
+* SOC voltage, is the voltage of the IMC. 
+  * IMCs can degrade with high SOC voltages and higher temperatures. 
+  * Higher voltages may cause instability.
+
+* **(Zen2 only)** VDDG: Infinity Fabric voltage.
+  * Needs to be at least 40mV under SOC voltage since it's derived from SOC voltage.  
 
  
- # Integrated Circuits (ICs)
+# Printed Circuit Board (PCB)
 
- Note: ICs usually are referred to as "dies"
+// ver https://www.youtube.com/watch?v=ZJDXsoYKZaY
+
+* A0: 
+  * JEDEC stock PCB for DDR4-2133.
+  * The favourite PCB for extreme overclocking.
+  * Aways single rank (only one side of the PCB will have ICs).
+* A1:
+  * JEDEC stock PCB for DDR4-2400.
+  * Not very popular in the overclocking community, since it's rarely used on high-end RAM kits.
+* A2:
+  * JEDEC stock PCB for DDR-2666.
+  * A good PCB, usually found in RGB RAM kits.
+* B1:
+  * JEDEC stock PCB for DDR4-2400.
+  * Not good at overclocking.
+  * Usually dual-rank (ICs on both sides of the PCB).
+* B2:  
+  * JEDEC stock PCB for DDR4-2666.
+  * Not good at overclocking.
+  * Usually dual-rank (ICs on both sides of the PCB).
+* C0:
+  * JEDEC stock PCB for DDR-2400 with bigger ICs.  
+  * Little is known about its overclocking potential.
+
+# Integrated Circuits (ICs)
+
+Note: ICs usually are referred to as "dies"
  
-  * Knowing well your ICs will give you an idea of what to expect from your RAM.
-  * They are a wide variety of ICs which are made by Hynix, Micron, Nanya or Samsung which will perform different while overclocking.
-    * Samsung B-die: The best ICs in the market, they will scale very well with voltage and will be able to achieve high clock speeds with tight timings
+* Knowing well your ICs will give you an idea of what to expect from your RAM.
+* They are a wide variety of ICs which are made by Hynix, Micron, Nanya or Samsung which will perform different while overclocking.
+  * Samsung B-die: The best ICs in the market, they will scale very well with voltage and will be able to achieve high clock speeds with tight timings
    
+| IC | Expected Max Speed (MT/s) | Daily Voltage (V) | 
+| :-------------------: | :----: | :----: |
+| Samsung B-die | 5000+ | 1.50V | 
+| Hynix D-die (DJR) | 5000+ | 1.50V |
+| Micron E-die | 5000+ | 1.45V |
+| Samsung E-die | 5000+ | 1.45V | 
+| Hynix C-die (CJR) | 4133 | 1.45V |
+| Samsung D-die | 4000+ | 1.45V |
+| Hynix A-die (AFR) | 3600 | 1.45V |
+  
+## Density
+  
+* x8 configurations are faster than x16.
+  * Since they have double the amount of banks and groups compared to x16 configurations. // ver https://www.youtube.com/watch?v=k6SIdxq2yxE) 
    
-  | IC | Expected Max Speed (MT/s) | Daily Voltage (V) | 
-  | :-------------------: | :----: | :----: |
-  | Samsung B-die | 5000+ | 1.5V | 
-  | Hynix D-die (DJR) | 5000+ | 1.5V |
-  | Micron E-die | 5000+ | 1.45V |
-  | Samsung E-die | 5000+ | 1.45V | 
-  | Hynix C-die (CJR) | 4133 | 1.45V |
-  | Samsung D-die | 4000+ | 1.45V |
-  | Hynix A-die (AFR) | 3600 | 1.45V |
-  
-  
-  ## Density
-  
-  * x8 configurations are faster than x16.
-    * Since they have double the amount of banks and groups compared to x16 configurations. // ver o video do buildzoid e melhorar aqui 
-     
-  * Densities will determine how far your IC can go while overclocking.
-    * Even having the same name, they can have different overclocking results thanks to their differences in density.
-      * Micron Rev. B has 8Gb and 16Gb configurations, and the 16Gb version performs better.
-        * This happens because having twice as many banks means that twice as many memory rows can be opened or closed at any time. That will save you time on RAS/RC/RCD (waiting for a closed row to open) or RP (waiting for a row to close to open another one) operations because they will be less often.
+* Densities will determine how far your IC can go while overclocking.
+  * Even having the same name, they can have different overclocking results thanks to their differences in density.
+    * Micron Rev. B has 8Gb and 16Gb configurations, and the 16Gb version performs better.
+      * This happens because having twice as many banks means that twice as many memory rows can be opened or closed at any time. That will save you time on RAS/RC/RCD (waiting for a closed row to open) or RP (waiting for a row to close to open another one) operations because they will be less often.
     
-  ## Logical Ranks
+## Logical Ranks
   
-  * Single-rank sticks are used to clock higher than dual-rank sticks, but dual-rank sticks have the advantage of being able of using rank interleaving.
+* Single-rank sticks are used to clock higher than dual-rank sticks, but dual-rank sticks have the advantage of being able of using rank interleaving.
+
+Rank interleaving allows the memory controller to parallelize memory requests, for example, you can write in one rank while reading or refreshing the other one.  
   
-  Rank interleaving allows the memory controller to parallelize memory requests, for example, you can write in one rank while reading or refreshing the other one.  
-  
-  * Today on Zen3 platforms, newer BIOS and memory controllers support dual-rank better. So you may be able to make dual-rank sticks clock as high as single-rank, but you will also have the performance gains from rank interleaving.
-  * The downsides of dual-rank sticks are:
-    * In older platforms, BIOS and memory controllers won't support rank interleaving very well.
-    * As the total count of ranks in the system increases, the load of the memory controller will also increase, which will require a higher SOC voltage.   
+* Today on Zen3 platforms, newer BIOS and memory controllers support dual-rank better. So you may be able to make dual-rank sticks clock as high as single-rank, but you will also have the performance gains from rank interleaving.
+* The downsides of dual-rank sticks are:
+  * In older platforms, BIOS and memory controllers won't support rank interleaving very well.
+  * As the total count of ranks in the system increases, the load of the memory controller will also increase, which will require a higher SOC voltage.   
     
-  ## Voltage
+## Voltage
+
+* [JEDEC JESD79-4B (p.174)](http://www.softnology.biz/pdf/JESD79-4B.pdf) specifies that the absolute maximum is 1.50 V.
+  > Stresses greater than those listed under “Absolute Maximum Ratings” may cause permanent damage to the device. This is a stress rating only, and functional operation of the device at these or any other conditions above those indicated in the operational sections of this specification is not implied. Exposure to absolute maximum rating conditions for extended periods may affect reliability.
+* Even with the official value being 1.50V, the majority of the ICs cannot remain safe at this voltage, for example, Samsung C-die can start degrading with 1.35V. Furthermore, ICs like Samsung B-die have been observed with daily voltages of 1.5V for years. If you want to play it safe, research what voltages are safe for your IC, or just stick to 1.35V.
+* On the majority of the ICs, tCL scales with voltage, which means that giving more voltage to the IC, will allow you to drop tCL, but tRCD, tRP and tRFC typically will not scale with voltage.
+* Some bad ICs can also scale negatively with voltage, becoming unstable at higher voltages.
+* Very high voltages can also overheat the ICs and make them perform worse and degrade faster.
+* According to [JEDEC](https://www.jedec.org/standards-documents/dictionary/terms/output-stage-drain-power-voltage-vddq), VDDQ (Output Stage Drain Power Voltage), is tied to VDD (DRAM Voltage or VDIMM), these voltages interact with the CPU and high voltages for a long time will lead to long-term degradation of the IMC. That's why is never advised to go above 1.60V on Zen2 and Zen3.
+  * CPU degradation is very difficult to measure or notice until its issues become serious. 
   
-  * On the majority of the ICs, tCL scales with voltage, which means that giving more voltage to the IC, will allow you to drop tCL, but tRCD, tRP and tRFC typically will not scale with voltage.
-  * Some bad ICs can also scale negatively with voltage, becoming unstable at higher voltages.
-  * Very high voltages can also overheat the ICs and make them perform worse.
+| DRAM | Daily Voltage (V) | Extreme Voltage (V) | 
+| :-----: | :------------: | :-----------------: |
+|  | 1.20V ~ 1.45V | 1.45V ~ 1.6V | 
+
+Voltages exceeding 1.45V for daily use are only recommended for Samsung B-die and Hynix D-die which are up to 1.50V. To use extreme voltages daily you will need good PCBs and it's also recommended to hydro-cool your sticks.
+
+| SOC | Daily Voltage (V) | Extreme Voltage (V) | 
+| :-----: | :------------: | :-----------------: |
+|  | 1.00V ~ 1.20V | 1.20V ~ 1.25V |
   
-    
+It's not recommended to leave SOC voltage on auto, the range should be around 1.00V and 1.2V. Higher values can also be acceptable and may be necessary to stabilize memories with higher capacities and stabilise FCLK. 
+  
+If your SOC voltage is too high (1.2V-1.25V), it can also cause memory instability.  
+  
+## Temperature
+  
+* Good airflow is vital to remove heat from the heat spreaders.
+* If you want to overclock a RAM stick without a heat spreader I highly recommend installing an aftermarket heat spreader or your overclocking capabilities will be very low.
+* Generally you want to keep your RAM below 50 °C, higher temperatures may cause instability.
+* Higher voltages will make your ICs hotter.
+ 
