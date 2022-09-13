@@ -1,4 +1,4 @@
-# AMD-RAM-OC-Guide
+# RYZEN-RAM-OC-Guide
 
 # Table of Contents
 - [Table of Contents](#table-of-contents)
