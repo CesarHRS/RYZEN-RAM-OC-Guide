@@ -3,6 +3,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Basics](#basics)
+  - [Frequency, Latency and True Latency](#frequency-latency-and-true-latency)
   - [Primary, Secondary and Tertiary Timings](#primary-secondary-and-tertiary-timings)
     - [Primary](#primary)
     - [Secondary](#secondary)
@@ -30,6 +31,8 @@
 
 # Basics:
   This section will go through the minimum knowledge required to overclock RAM. 
+
+## Frequency, Latency and True Latency:
 
 * RAM frequency is measured in megahertz (MHz), having your RAM operating at a higher frequency means more cycles per second, which will give you some extra performance. Having very high frequencies can make your RAM unstable and it may crash your PC.
   * **Advanced tip:** The only case witch lowering the clock will result in better performance is in tREFI since tREFI measures the timing between RAM refreshes. While your RAM refreshes, you can't write or read anything on it, so you want to make that time gap as little as possible.
@@ -101,11 +104,11 @@ IMCs are responsible to read and write and refresh DRAM.
 
 Expected memory frequency range for 2 single-rank DIMMs, with just the IMC bottleneck:
  
-| Ryzen | Expected Speed (MT/s) |
-| :---: | :----------------------: |
-| Zen | 3000 - 3600 |
-| Zen+ | 3400 - 3800 |
-| Zen2 | 3600 - 3800 (1:1 MCLK:FCLK) <br/> 3800+ (2:1 MCLK:FCLK) |
+| Ryzen |                    Expected Speed (MT/s)                    |
+|:-----:|:-----------------------------------------------------------:|
+|  Zen  |                         3000 - 3600                         |
+| Zen+  |                         3400 - 3800                         |
+| Zen2  | 3600 - 3800 `(1:1 MCLK:FCLK)` <br/> 3800+ `(2:1 MCLK:FCLK)` |
  
 With more DIMMs and/or dual-rank DIMMs, the expected frequency may be lower.
 
@@ -129,10 +132,10 @@ Terminology:
   * Higher voltages may cause instability.
 
 | SOC | Daily Voltage (V) | Extreme Voltage (V) | 
-| :-----: | :------------: | :-----------------: |
-|  | 1.00V ~ 1.20V | 1.20V ~ 1.25V |
+|:---:|:-----------------:|:-------------------:|
+|     |   1.00V ~ 1.20V   |    1.20V ~ 1.25V    |
   
-It's not recommended to leave SOC voltage on auto, the range should be around 1.00V and 1.20V. Higher values aren't encouraged but can be acceptable and even necessary to stabilize memories with higher capacities and stabilise FCLK. 
+It's not recommended to leave SOC voltage on auto, the range should be around 1.00V and 1.20V. Higher values aren't encouraged but can be acceptable and even necessary to stabilize memories with higher capacities and stabilize FCLK. 
   
 If your SOC voltage is too high (1.2V-1.25V), it can also cause memory instability.  
 
@@ -151,7 +154,7 @@ If your SOC voltage is too high (1.2V-1.25V), it can also cause memory instabili
 * A1:
   * JEDEC stock PCB for DDR4-2400.
   * Not very popular in the overclocking community, since it's rarely used on high-end RAM kits.
-* A2:
+* A2/A3:
   * JEDEC stock PCB for DDR-2666.
   * A good PCB, usually found in RGB RAM kits.
 * B1:
@@ -174,15 +177,15 @@ Note: ICs usually are referred to as "dies"
 * They are a wide variety of ICs which are made by Hynix, Micron, Nanya or Samsung which will perform different while overclocking.
   * Samsung B-die: The best ICs in the market, they will scale very well with voltage and will be able to achieve high clock speeds with tight timings
    
-| IC | Expected Max Speed (MT/s) | Daily Voltage (V) | 
-| :-------------------: | :----: | :----: |
-| Samsung B-die | 5000+ | 1.50V | 
-| Hynix D-die (DJR) | 5000+ | 1.50V |
-| Micron E-die | 5000+ | 1.45V |
-| Samsung E-die | 5000+ | 1.45V | 
-| Hynix C-die (CJR) | 4133 | 1.45V |
-| Samsung D-die | 4000+ | 1.45V |
-| Hynix A-die (AFR) | 3600 | 1.45V |
+|         IC         | Expected Max Speed (MT/s) | Daily Voltage (V) | 
+|:------------------:|:-------------------------:|:-----------------:|
+|   Samsung B-die    |           5000+           |       1.50V       | 
+| Hynix D-die (DJR)  |           5000+           |       1.50V       |
+|    Micron E-die    |           5000+           |       1.45V       |
+|   Samsung E-die    |           5000+           |       1.45V       | 
+| Hynix C-die (CJR)  |           4133            |       1.45V       |
+|   Samsung D-die    |           4000+           |       1.45V       |
+| Hynix A-die (AFR)  |           3600            |       1.45V       |
   
 ## Density
   
@@ -217,8 +220,8 @@ Rank interleaving allows the memory controller to parallelize memory requests, f
   * CPU degradation is very difficult to measure or notice until its issues become serious. 
   
 | DRAM | Daily Voltage (V) | Extreme Voltage (V) | 
-| :-----: | :------------: | :-----------------: |
-|  | 1.20V ~ 1.45V | 1.45V ~ 1.6V | 
+|:----:|:-----------------:|:-------------------:|
+|      |   1.20V ~ 1.45V   |    1.45V ~ 1.6V     | 
 
 Voltages exceeding 1.45V for daily use are only recommended for Samsung B-die and Hynix D-die which are up to 1.50V. To use extreme voltages daily you will need good PCBs and it's also recommended to hydro-cool your sticks.
   
@@ -229,3 +232,31 @@ Voltages exceeding 1.45V for daily use are only recommended for Samsung B-die an
 * Generally you want to keep your RAM below 50 °C, higher temperatures may cause instability.
 * Higher voltages will make your ICs hotter.
  
+# Setup:
+
+## Identifying your RAM:
+
+* First thing you will have to do is identify your RAM ICs and PCB, for that we will be using [Thaiphoon Burner](http://www.softnology.biz/files.html).
+    * Thaipoon Burner is not the best software since sometimes it shows wrong results, but there are no alternatives.
+
+![](Images/MicronEDie.png)
+
+Micron E-die, 8Gb, single-rank with A2 PCB.
+
+![](Images/Hynix%20DJR.png)
+
+Hynix D-die (DJR), 8Gb, single-rank with A3 PCB.
+
+![](Images/Hynix%20JJR.png)
+
+Hynix J-die (JJR), 8Gb, single-rank with A3 PCB.
+
+## Getting Started
+
+* After you know your RAM, you can start by putting your VDD / VDIMM to the maximum voltage your ICs can go while not degrading yet.
+* Then try to put very high timings and try discovering the highest frequencies you can get while keeping the `MCLK:FCLK`, once you start seeing any kind of instability, try desynchronizing your FCLK and keep going.
+* Once you got the highest speed your RAM can get with the FCLK synchronized and desynchronized, try tightening the timings as you can get, starting with the primary, then the secondary and then the tertiary.
+
+
+
+
