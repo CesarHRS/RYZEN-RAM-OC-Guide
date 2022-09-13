@@ -17,6 +17,9 @@
     - [Logical Ranks](#logical-ranks)
     - [Voltage](#voltage) 
     - [Temperature](#temperature)
+- [Setup](#setup)
+  - [Identifying your RAM](#identifying-your-ram)   
+  - [Getting Started](#getting-started)
 
 * Units:
   * Hertz: It's a unit of frequency used in the SI, it is equivalent to one cycle per second.
@@ -234,7 +237,7 @@ Voltages exceeding 1.45V for daily use are only recommended for Samsung B-die an
  
 # Setup:
 
-## Identifying your RAM:
+## Identifying your RAM
 
 * First thing you will have to do is identify your RAM ICs and PCB, for that we will be using [Thaiphoon Burner](http://www.softnology.biz/files.html).
     * Thaipoon Burner is not the best software since sometimes it shows wrong results, but there are no alternatives.
