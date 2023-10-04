@@ -148,8 +148,6 @@ If your SOC voltage is too high (1.2V-1.25V), it can also cause memory instabili
  
 # Printed Circuit Board (PCB)
 
-// ver https://www.youtube.com/watch?v=ZJDXsoYKZaY
-
 * A0: 
   * JEDEC stock PCB for DDR4-2133.
   * The favourite PCB for extreme overclocking.
@@ -193,7 +191,7 @@ Note: ICs usually are referred to as "dies"
 ## Density
   
 * x8 configurations are faster than x16.
-  * Since they have double the amount of banks and groups compared to x16 configurations. // ver https://www.youtube.com/watch?v=k6SIdxq2yxE) 
+  * x16 memories feature larger memory banks, housing an increased number of logic gates, which results in longer signal propagation delays. 
    
 * Densities will determine how far your IC can go while overclocking.
   * Even having the same name, they can have different overclocking results thanks to their differences in density.
@@ -233,7 +231,7 @@ Voltages exceeding 1.45V for daily use are only recommended for Samsung B-die an
 * Good airflow is vital to remove heat from the heat spreaders.
 * If you want to overclock a RAM stick without a heat spreader I highly recommend installing an aftermarket heat spreader or your overclocking capabilities will be very low.
 * Generally you want to keep your RAM below 50 °C, higher temperatures may cause instability.
-* Higher voltages will make your ICs hotter.
+* Higher voltages will make your ICs hotter and decrease their lifespam.
  
 # Setup:
 
@@ -261,14 +259,15 @@ Hynix J-die (JJR), 8Gb, single-rank with A3 PCB.
 * Once you got the highest speed your RAM can get with the FCLK synchronized and desynchronized, try tightening the timings as you can get, starting with the primary, then the secondary and then the tertiary.
 
 
-## Testing for stability
+# References:
 
-* After you've managed to boot, it is important to ensure that your computer is stable at the assigned speed before daily-driving it, and for that we'll be using memory stress tests:
-  * [HCI MemTest](https://hcidesign.com/memtest/) can be used for Windows
-  * [AIDA64](https://www.aida64.com/downloads) is available for multiple operating systems and includes a memory tester
-  * Passmark's [MemTest86] runs from a bootable USB Flash Drive.
-* Observations:
-  * Remember to go through the **whole** memory when stress testing, as errors may appear in different sectors of the available memory and may take some time to be found.
-  * If you are using Integrated Graphics, some instability may occur due to the iGPU's memory controller, which is separate from the CPU's. Memory stress tests will not be able to show any of these errors and it is recommended to also run GPU and VRAM tests to ensure reliability.
-* In case the stress test results in errors or the computer crashes, it means the memory is unstable and the computer cannot reliably be used at these settings. You should go back to the BIOS and try changing the settings 
+[How double data rate DRAM works] (https://youtu.be/OokKoNO75QE?si=y93PdThkWdFBGvK_)
+[RAM timings explained 0] (https://youtu.be/105IJiGbGsg?si=5gFEczUr2EsROHI3)
+[DDR4 timings explained 1: tCL tRCD tCR // Literally just a single read burst operation] (https://youtu.be/UtdZaxw2brQ?si=OPj6vfi3bwNfjSWA)
+[DDR4 timings explained 2: THE ABSOLUTE CHAOS OF tRAS, tRP, tRTP and tRC] (https://youtu.be/vFVslcsuDe0?si=4T_9I2cQ3G_S4IAA)
+[DDR4 timings explained 3: tRP VS tRAS for performance] (https://youtu.be/LGZONuG1sJY?si=MXWqEKDyc-dWJ5HX)
+[DDR4 timings explained: tRRD & tFAW // THE MOST IMPORTANT MEMORY TIMINGS] (https://www.youtube.com/watch?v=IyLJCLoOjdg&list=PLpS0n7xxSadUJE1fEuWfEMGvmMsVYGAbA&index=6)
+
+[Rambling about DDR4 chips and PCBs] (https://www.youtube.com/watch?v=ZJDXsoYKZaY)
+[Why X16 memory chips have less bandwidth than X8 memory chips] (https://www.youtube.com/watch?v=k6SIdxq2yxE)
 
