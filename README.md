@@ -261,5 +261,14 @@ Hynix J-die (JJR), 8Gb, single-rank with A3 PCB.
 * Once you got the highest speed your RAM can get with the FCLK synchronized and desynchronized, try tightening the timings as you can get, starting with the primary, then the secondary and then the tertiary.
 
 
+## Testing for stability
 
+* After you've managed to boot, it is important to ensure that your computer is stable at the assigned speed before daily-driving it, and for that we'll be using memory stress tests:
+  * [HCI MemTest](https://hcidesign.com/memtest/) can be used for Windows
+  * [AIDA64](https://www.aida64.com/downloads) is available for multiple operating systems and includes a memory tester
+  * Passmark's [MemTest86] runs from a bootable USB Flash Drive.
+* Observations:
+  * Remember to go through the **whole** memory when stress testing, as errors may appear in different sectors of the available memory and may take some time to be found.
+  * If you are using Integrated Graphics, some instability may occur due to the iGPU's memory controller, which is separate from the CPU's. Memory stress tests will not be able to show any of these errors and it is recommended to also run GPU and VRAM tests to ensure reliability.
+* In case the stress test results in errors or the computer crashes, it means the memory is unstable and the computer cannot reliably be used at these settings. You should go back to the BIOS and try changing the settings 
 
