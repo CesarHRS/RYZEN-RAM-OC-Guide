@@ -261,13 +261,19 @@ Hynix J-die (JJR), 8Gb, single-rank with A3 PCB.
 
 # References:
 
-[How double data rate DRAM works] (https://youtu.be/OokKoNO75QE?si=y93PdThkWdFBGvK_)
-[RAM timings explained 0] (https://youtu.be/105IJiGbGsg?si=5gFEczUr2EsROHI3)
-[DDR4 timings explained 1: tCL tRCD tCR // Literally just a single read burst operation] (https://youtu.be/UtdZaxw2brQ?si=OPj6vfi3bwNfjSWA)
-[DDR4 timings explained 2: THE ABSOLUTE CHAOS OF tRAS, tRP, tRTP and tRC] (https://youtu.be/vFVslcsuDe0?si=4T_9I2cQ3G_S4IAA)
-[DDR4 timings explained 3: tRP VS tRAS for performance] (https://youtu.be/LGZONuG1sJY?si=MXWqEKDyc-dWJ5HX)
-[DDR4 timings explained: tRRD & tFAW // THE MOST IMPORTANT MEMORY TIMINGS] (https://www.youtube.com/watch?v=IyLJCLoOjdg&list=PLpS0n7xxSadUJE1fEuWfEMGvmMsVYGAbA&index=6)
+[How double data rate DRAM works](https://youtu.be/OokKoNO75QE?si=y93PdThkWdFBGvK)
 
-[Rambling about DDR4 chips and PCBs] (https://www.youtube.com/watch?v=ZJDXsoYKZaY)
-[Why X16 memory chips have less bandwidth than X8 memory chips] (https://www.youtube.com/watch?v=k6SIdxq2yxE)
+[RAM timings explained 0](https://youtu.be/105IJiGbGsg?si=5gFEczUr2EsROHI3)
+
+[DDR4 timings explained 1: tCL tRCD tCR // Literally just a single read burst operation](https://youtu.be/UtdZaxw2brQ?si=OPj6vfi3bwNfjSWA)
+
+[DDR4 timings explained 2: THE ABSOLUTE CHAOS OF tRAS, tRP, tRTP and tRC](https://youtu.be/vFVslcsuDe0?si=4T_9I2cQ3G_S4IAA)
+
+[DDR4 timings explained 3: tRP VS tRAS for performance](https://youtu.be/LGZONuG1sJY?si=MXWqEKDyc-dWJ5HX)
+
+[DDR4 timings explained: tRRD & tFAW // THE MOST IMPORTANT MEMORY TIMINGS](https://www.youtube.com/watch?v=IyLJCLoOjdg&list=PLpS0n7xxSadUJE1fEuWfEMGvmMsVYGAbA&index=6)
+
+[Rambling about DDR4 chips and PCBs](https://www.youtube.com/watch?v=ZJDXsoYKZaY)
+
+[Why X16 memory chips have less bandwidth than X8 memory chips](https://www.youtube.com/watch?v=k6SIdxq2yxE)
 
