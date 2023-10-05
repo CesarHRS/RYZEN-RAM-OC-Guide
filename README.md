@@ -97,7 +97,7 @@ Blue (T) = Tertiary Timings.
  
 ## Motherboard
 * Always prefer motherboards with 2 DIMM slots, they will let you achieve higher frequencies. However, entry-level motherboards, which usually feature 2 DIMM Slots may not overclock as well thanks to their low-quality PCBs.
-* While using motherboards that use daisy chain (4 slots, usually), 2 sticks are preferred, if you use 4 sticks the performance will be impacted // ver o video do buildzoid
+* While using motherboards that use daisy chain (4 slots, usually), 2 sticks are preferred, if you use 4 sticks the performance will be impacted
 * Motherboards with T-topology will overclock better with 4 sticks equipped, using 2 sticks will not cap your overclocking capability that much as in a daisy chain with 4 slots. 
  
 ## Integrated Memory Controller (IMC)
